@@ -9,7 +9,8 @@ using PlayFab.SharedModels;
 namespace PlayFab
 {
     /// <summary>
-    /// API methods for managing the catalog. Inventory manages in-game assets for any given entity.
+    /// API methods for managing the catalog. Inventory manages in-game assets for any given entity. API methods for managing
+    /// the versioned catalogs.
     /// </summary>
     public class PlayFabEconomyInstanceAPI : IPlayFabInstanceApi
     {
@@ -63,7 +64,7 @@ namespace PlayFab
         }
 
         /// <summary>
-        /// Creates a new item in the working catalog using provided metadata.
+        /// Creates a new item in the working catalog using provided metadata. Note: SAS tokens provided are valid for 1 hour.
         /// </summary>
         public void CreateDraftItem(CreateDraftItemRequest request, Action<CreateDraftItemResponse> resultCallback, Action<PlayFabError> errorCallback, object customData = null, Dictionary<string, string> extraHeaders = null)
         {
@@ -133,7 +134,7 @@ namespace PlayFab
         }
 
         /// <summary>
-        /// Execute a list of Inventory Operations. A maximum list of 250 operations can be performed by a single request. There is
+        /// Execute a list of Inventory Operations. A maximum list of 50 operations can be performed by a single request. There is
         /// also a limit to 300 items that can be modified/added in a single request. For example, adding a bundle with 50 items
         /// counts as 50 items modified. All operations must be done within a single inventory collection. This API has a reduced
         /// RPS compared to an individual inventory operation with Player Entities limited to 60 requests in 90 seconds.
@@ -176,7 +177,8 @@ namespace PlayFab
         /// <summary>
         /// Retrieves an item from the working catalog. This item represents the current working state of the item. GetDraftItem
         /// does not work off a cache of the Catalog and should be used when trying to get recent item updates. However, please note
-        /// that item references data is cached and may take a few moments for changes to propagate.
+        /// that item references data is cached and may take a few moments for changes to propagate. Note: SAS tokens provided are
+        /// valid for 1 hour.
         /// </summary>
         public void GetDraftItem(GetDraftItemRequest request, Action<GetDraftItemResponse> resultCallback, Action<PlayFabError> errorCallback, object customData = null, Dictionary<string, string> extraHeaders = null)
         {
@@ -188,7 +190,8 @@ namespace PlayFab
 
         /// <summary>
         /// Retrieves a paginated list of the items from the draft catalog. Up to 50 IDs can be retrieved in a single request.
-        /// GetDraftItems does not work off a cache of the Catalog and should be used when trying to get recent item updates.
+        /// GetDraftItems does not work off a cache of the Catalog and should be used when trying to get recent item updates. Note:
+        /// SAS tokens provided are valid for 1 hour.
         /// </summary>
         public void GetDraftItems(GetDraftItemsRequest request, Action<GetDraftItemsResponse> resultCallback, Action<PlayFabError> errorCallback, object customData = null, Dictionary<string, string> extraHeaders = null)
         {
@@ -584,7 +587,7 @@ namespace PlayFab
         }
 
         /// <summary>
-        /// Update the metadata for an item in the working catalog.
+        /// Update the metadata for an item in the working catalog. Note: SAS tokens provided are valid for 1 hour.
         /// </summary>
         public void UpdateDraftItem(UpdateDraftItemRequest request, Action<UpdateDraftItemResponse> resultCallback, Action<PlayFabError> errorCallback, object customData = null, Dictionary<string, string> extraHeaders = null)
         {
